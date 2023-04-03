@@ -3,11 +3,6 @@ import java.awt.*;
 
 public class Paint extends JFrame {
 
-    private JButton draw_rectangle_button;
-    private JButton draw_oval_button;
-    private JButton draw_with_pen_button;
-    private JButton move_button;
-
 
     private boolean is_under_the_blue_line;
     private JPanel optionPanel;
@@ -18,36 +13,36 @@ public class Paint extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         this.is_under_the_blue_line = false;
-        draw_rectangle_button = new JButton("Dikdortgen Ciz");
-        draw_oval_button = new JButton("Oval Ciz");
-        draw_with_pen_button = new JButton("Kalemle Ciz");
-        move_button = new JButton("Tasi");
+        this.optionPanel = new JPanel(new GridLayout(2,0));
 
-        optionPanel = new JPanel();
-        optionPanel.add(draw_rectangle_button);
-        optionPanel.add(draw_oval_button);
-        optionPanel.add(draw_with_pen_button);
-        optionPanel.add(move_button);
-        optionPanel.setVisible(true);
-        add(optionPanel, BorderLayout.NORTH);
+        JButton draw_rectangle_button = new JButton("Dikdortgen Ciz");
+        JButton draw_oval_button = new JButton("Oval Ciz");
+        JButton draw_with_pen_button = new JButton("Kalemle Ciz");
+        JButton move_button = new JButton("Tasi");
 
+        JPanel buttonPanel = new JPanel(new GridLayout(1,0));
+        buttonPanel.add(draw_rectangle_button);
+        buttonPanel.add(draw_oval_button);
+        buttonPanel.add(draw_with_pen_button);
+        buttonPanel.add(move_button);
 
+        JPanel topPanel = new JPanel(new GridLayout(1,0));
+        ColorPalette colorPalettes = new ColorPalette();
+        topPanel.add(colorPalettes);
 
-
-    }
-
-    public void paintComponent(Graphics g){
-        super.paintComponents(g);
-        Color[] colors = {Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.ORANGE, new Color(123, 35, 123), Color.BLACK};
-        int x = 50;
-        int y = 50;
-        int width = 50;
-        int height = 50;
-        for (int i = 0; i < 7; i++) {
-            g.setColor(colors[i]);
-            g.fillRect(x, y, width, height);
-            x += 60;
-        }
+        this.optionPanel.add(topPanel);
+        this.optionPanel.add(buttonPanel);
+        add(this.optionPanel, BorderLayout.NORTH);
+        JPanel blueLinePanel = new JPanel() {
+            @Override
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.setColor(Color.BLUE);
+                g.drawLine(0, 50, getWidth(), 50);
+            }
+        };
+        blueLinePanel.setPreferredSize(new Dimension(1000, 50));
+        add(blueLinePanel);
     }
 
 }
