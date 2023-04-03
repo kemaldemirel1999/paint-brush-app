@@ -6,12 +6,9 @@ import java.awt.event.MouseEvent;
 public class ColorPalette extends JPanel {
 
     private Color color;
-    private Paint paint;
-
     public ColorPalette(Color color, Paint paint) {
         super();
         this.color = color;
-        this.paint = paint;
         setPreferredSize(new Dimension(50, 70));
         addMouseListener(new MouseAdapter() {
             @Override
