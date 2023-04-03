@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DrawTable extends JPanel implements MouseMotionListener, MouseListener {
@@ -21,6 +22,8 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
 
     private ArrayList<Ellipse2D.Double> tmp_ovals = new ArrayList<>();
     private ArrayList<ArrayList> ovals = new ArrayList<>();
+
+    private ArrayList<ArrayList> linePoints = new ArrayList<>();
 
 
     public DrawTable(){
@@ -45,7 +48,10 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
         g.setColor(pen_color);
 
         if (this.mode.equals("pen")){
-            g.drawLine(old_x, old_y, x, y);
+            ArrayList<Object> tmp = new ArrayList<>();
+            tmp.add(new int[] { x, y , old_x, old_y});
+            tmp.add(this.pen_color);
+            linePoints.add(tmp);
         }
         else if(this.mode.equals("rectangle")){
             tmp_rectangles.clear();
@@ -80,7 +86,10 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
         start = e.getPoint();
         System.out.println("start_x:"+start.x+", start_y:"+start.y);
         if(mode.equals("move")){
-
+            ArrayList<Object> tmp = new ArrayList<>();
+            tmp.add(new int[] { x, y , old_x, old_y});
+            tmp.add(this.pen_color);
+            linePoints.add(tmp);
         }
         else if(mode.equals("oval")){
 
@@ -139,6 +148,11 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
 
     public void paint(Graphics g){
         super.paint(g);
+        for (ArrayList line_info: linePoints){
+            int[] coordinates = (int[]) line_info.get(0);
+            g.setColor((Color) line_info.get(1));
+            g.drawLine(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
+        }
         for (Rectangle rect : tmp_rectangles) {
             g.setColor(this.pen_color);
             g.fillRect(rect.x, rect.y, rect.width, rect.height);
