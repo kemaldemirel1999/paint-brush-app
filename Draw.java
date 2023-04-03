@@ -38,7 +38,6 @@ public class Draw extends JComponent {
     public void paintComponent(Graphics g){
 
     }
-
     public void mousePressed(MouseEvent e) {}
     public void mouseReleased(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
