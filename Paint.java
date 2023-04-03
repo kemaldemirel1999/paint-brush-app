@@ -3,22 +3,21 @@ import java.awt.*;
 
 public class Paint extends JFrame {
 
-
-    private boolean is_under_the_blue_line;
     private JPanel optionPanel;
 
     public Paint(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 1000);
         setLocationRelativeTo(null);
-        this.is_under_the_blue_line = false;
         add(getOptionPanel(), BorderLayout.NORTH);
+        DrawTable drawTable = new DrawTable();
+        add(drawTable, BorderLayout.CENTER);
         setVisible(true);
     }
-    public JSeparator getBlueLineSeparator(){
-        JSeparator blueLine = new JSeparator(SwingConstants.HORIZONTAL);
+    public JPanel getBlueLineSeparator(){
+        JPanel blueLine = new JPanel();
         blueLine.setBackground(Color.BLUE);
-        blueLine.setPreferredSize(new Dimension(0, 50));
+        blueLine.setPreferredSize(new Dimension(0, 5));
         return blueLine;
     }
 

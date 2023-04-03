@@ -36,7 +36,7 @@ public class ColorPalette extends JPanel {
                 else{
                     colorName = "Mor";
                 }
-                System.out.println("Yeni Kalem Rengi: " + colorName);
+                System.out.println("Yeni Secilen Renk: " + colorName);
             }
         });
     }
