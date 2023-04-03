@@ -6,37 +6,17 @@ import java.awt.event.MouseEvent;
 public class ColorPalette extends JPanel {
 
     private Color color;
+    private Paint paint;
 
-    public ColorPalette(Color color) {
+    public ColorPalette(Color color, Paint paint) {
         super();
         this.color = color;
+        this.paint = paint;
         setPreferredSize(new Dimension(50, 70));
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                String colorName;
-                if (Color.BLUE.equals(color)) {
-                    colorName = "Mavi";
-                }
-                else if (Color.RED.equals(color)) {
-                    colorName = "Kirmizi";
-                }
-                else if (Color.GREEN.equals(color)) {
-                    colorName = "Yesil";
-                }
-                else if (Color.YELLOW.equals(color)) {
-                    colorName = "Sari";
-                }
-                else if (Color.ORANGE.equals(color)) {
-                    colorName = "Turuncu";
-                }
-                else if (Color.BLACK.equals(color)) {
-                    colorName = "Siyah";
-                }
-                else{
-                    colorName = "Mor";
-                }
-                System.out.println("Yeni Secilen Renk: " + colorName);
+                paint.getDrawTable().setPen_color(color);
             }
         });
     }

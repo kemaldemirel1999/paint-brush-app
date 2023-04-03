@@ -8,6 +8,7 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
     private int y;
     private int old_x;
     private int old_y;
+    private Color pen_color;
 
 
     public DrawTable(){
@@ -15,8 +16,9 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
         y = 0;
         addMouseListener(this);
         addMouseMotionListener(this);
-        setBackground(Color.YELLOW);
+        setBackground(Color.GRAY);
         setVisible(true);
+        pen_color = new Color(Color.BLACK.getRGB());
     }
 
     @Override
@@ -26,7 +28,9 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
         x = e.getX();
         y = e.getY();
         System.out.println("x:"+x+", y:"+y);
-        repaint();
+        Graphics g = getGraphics();
+        g.setColor(pen_color);
+        g.drawLine(old_x, old_y, x, y);
     }
     @Override
     public void mouseMoved(MouseEvent e) {}
@@ -56,7 +60,13 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
     public void paint(Graphics g){
         System.out.println("Paint called");
         super.paint(g);
-        g.setColor(Color.black);
-        g.drawLine(old_x, old_y, x, y);
+    }
+
+    public Color getPen_color() {
+        return pen_color;
+    }
+
+    public void setPen_color(Color pen_color) {
+        this.pen_color = pen_color;
     }
 }

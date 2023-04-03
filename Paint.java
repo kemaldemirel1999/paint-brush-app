@@ -1,16 +1,19 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Paint extends JFrame {
 
     private JPanel optionPanel;
+    private DrawTable drawTable;
 
     public Paint(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 1000);
         setLocationRelativeTo(null);
         add(getOptionPanel(), BorderLayout.NORTH);
-        DrawTable drawTable = new DrawTable();
+        drawTable = new DrawTable();
         add(drawTable, BorderLayout.CENTER);
         setVisible(true);
     }
@@ -47,17 +50,25 @@ public class Paint extends JFrame {
         buttonPanel.add(move_button);
 
         JPanel colorPanel = new JPanel(new GridLayout(1,7));
-        colorPanel.add(new ColorPalette(Color.BLUE));
-        colorPanel.add(new ColorPalette(Color.RED));
-        colorPanel.add(new ColorPalette(Color.GREEN));
-        colorPanel.add(new ColorPalette(Color.YELLOW));
-        colorPanel.add(new ColorPalette(Color.ORANGE));
-        colorPanel.add(new ColorPalette(new Color(123, 35, 123)));
-        colorPanel.add(new ColorPalette(Color.BLACK));
+
+        colorPanel.add(new ColorPalette(Color.BLUE, this));
+        colorPanel.add(new ColorPalette(Color.RED, this));
+        colorPanel.add(new ColorPalette(Color.GREEN, this));
+        colorPanel.add(new ColorPalette(Color.YELLOW, this));
+        colorPanel.add(new ColorPalette(Color.ORANGE, this));
+        colorPanel.add(new ColorPalette(new Color(123, 35, 123), this));
+        colorPanel.add(new ColorPalette(Color.BLACK, this));
         this.optionPanel.add(colorPanel, BorderLayout.NORTH);
         this.optionPanel.add(buttonPanel, BorderLayout.CENTER);
         this.optionPanel.add(getBlueLineSeparator(), BorderLayout.SOUTH);
         return optionPanel;
     }
 
+    public DrawTable getDrawTable() {
+        return drawTable;
+    }
+
+    public void setDrawTable(DrawTable drawTable) {
+        this.drawTable = drawTable;
+    }
 }
