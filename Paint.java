@@ -13,7 +13,7 @@ public class Paint extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         this.is_under_the_blue_line = false;
-        this.optionPanel = new JPanel(new GridLayout(2,0));
+        this.optionPanel = new JPanel(new GridLayout(3,0));
 
         JButton draw_rectangle_button = new JButton("Dikdortgen Ciz");
         JButton draw_oval_button = new JButton("Oval Ciz");
@@ -26,23 +26,18 @@ public class Paint extends JFrame {
         buttonPanel.add(draw_with_pen_button);
         buttonPanel.add(move_button);
 
-        JPanel topPanel = new JPanel(new GridLayout(1,0));
-        ColorPalette colorPalettes = new ColorPalette();
-        topPanel.add(colorPalettes);
+        JPanel colorPanel = new JPanel(new GridLayout(1,0));
+        colorPanel.add(new ColorPalette(Color.BLUE));
+        colorPanel.add(new ColorPalette(Color.RED));
+        colorPanel.add(new ColorPalette(Color.GREEN));
+        colorPanel.add(new ColorPalette(Color.YELLOW));
+        colorPanel.add(new ColorPalette(Color.ORANGE));
+        colorPanel.add(new ColorPalette(Color.MAGENTA));
+        colorPanel.add(new ColorPalette(Color.BLACK));
 
-        this.optionPanel.add(topPanel);
+        this.optionPanel.add(colorPanel);
         this.optionPanel.add(buttonPanel);
         add(this.optionPanel, BorderLayout.NORTH);
-        JPanel blueLinePanel = new JPanel() {
-            @Override
-            public void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.setColor(Color.BLUE);
-                g.drawLine(0, 50, getWidth(), 50);
-            }
-        };
-        blueLinePanel.setPreferredSize(new Dimension(1000, 50));
-        add(blueLinePanel);
     }
 
 }
