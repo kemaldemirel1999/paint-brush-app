@@ -61,6 +61,7 @@ public class Options extends JPanel{
         // colorPanel includes all the color palette's that you can choose.
         JPanel colorPanel = new JPanel(new GridLayout(1,7));
 
+        // Color palette is not button. It is written by me as a JPanel
         colorPanel.add(new ColorPalette(Color.BLUE, paint));
         colorPanel.add(new ColorPalette(Color.RED, paint));
         colorPanel.add(new ColorPalette(Color.GREEN, paint));
