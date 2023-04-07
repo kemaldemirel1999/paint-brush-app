@@ -6,25 +6,30 @@ import java.util.ArrayList;
 
 public class DrawTable extends JPanel implements MouseMotionListener, MouseListener {
 
-    private int x;
-    private int y;
-    private int old_x;
-    private int old_y;
-    private Color pen_color;
-    private String mode;
-    private Point start, end;
-    private ArrayList<Object> dragged_rectangle;
-    private ArrayList<Object> dragged_oval;
-    private ArrayList<ArrayList> all_shapes;
-    private ArrayList<Object> moving_shape;
-    private Point lastMousePos;
+    private int x;  // Stores current x coordinate
+    private int y;  // Stores current y coordinate
+    private int old_x;  // Stores previous x coordinate
+    private int old_y;  // Stores previous y coordinate
+    private Color pen_color;    //  current pen color
+    private String mode;    // current mode which can be drawing rectangle, drawing ellipse, drawing with pen, and moving
+    private Point start, end;   // Start and end points used for drawing objects.
+    private ArrayList<Object> dragged_rectangle;    // while rectangle is creating, it can be seen on the screen.
+    private ArrayList<Object> dragged_oval; // While ellipse is creating, it can be seen on the screen.
+
+    // It includes ArrayList data structure.
+    // First element of inside ArrayList :Rectangle or Ellipse object.
+    // Second element of inside ArrayList :Color of the object
+    private ArrayList<ArrayList> all_shapes;    // Includes all the shapes to be paint.
+
+    private ArrayList<Object> moving_shape; // While objects is moved by 'tasi' button, it is painted.
+    private Point lastMousePos; // used for moving objects.
 
     public DrawTable(){
         this.x = 0;
         this.y = 0;
         addMouseListener(this);
         addMouseMotionListener(this);
-        setBackground(Color.GRAY);
+        // setBackground(Color.GRAY);
         setVisible(true);
         this.pen_color = new Color(Color.BLACK.getRGB());
         this.mode = "";
@@ -41,9 +46,8 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
         old_y = y;
         x = e.getX();
         y = e.getY();
-        Graphics g = getGraphics();
-        g.setColor(pen_color);
 
+        // While mouse dragged, associated mode is processed.
         if (this.mode.equals("pen")){
             ArrayList<Object> tmp = new ArrayList<>();
             tmp.add(new int[] { x, y , old_x, old_y});
@@ -94,7 +98,7 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
             }
             lastMousePos = e.getPoint();
         }
-        repaint();
+        repaint(); // calls paint method
     }
 
     @Override
@@ -102,7 +106,7 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
         x = e.getX();
         y = e.getY();
         start = e.getPoint();
-        System.out.println("start_x:"+start.x+", start_y:"+start.y);
+        // System.out.println("start_x:"+start.x+", start_y:"+start.y);
         if(mode.equals("pen")){
             ArrayList<Object> tmp = new ArrayList<>();
             tmp.add(new int[] { x, y , x, y});
@@ -157,15 +161,13 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
             }
             lastMousePos = e.getPoint();
         }
-        repaint();
+        repaint(); // calls paint method
     }
     @Override
     public void mouseReleased(MouseEvent e) {
         x = e.getX();
         y = e.getY();
         end = e.getPoint();
-        Graphics g = getGraphics();
-        g.setColor(this.pen_color);
 
         if(mode.equals("move")){
             if(moving_shape.get(0).getClass().equals(Rectangle.class)){
@@ -220,7 +222,7 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
             start = null;
             end = null;
         }
-        repaint();
+        repaint(); // calls paint method
     }
 
     @Override
@@ -234,6 +236,9 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
 
     public void paint(Graphics g){
         super.paint(g);
+
+        // rectangle, ellipse and line information are included in all_shapes
+        // associated shape_info used for painting rectangle, line, and ellipse
         for(ArrayList shape_info: all_shapes){
             if(shape_info.get(0).getClass().equals(Rectangle.class)){
                 g.setColor((Color) shape_info.get(1));
@@ -251,6 +256,10 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
                 g.drawLine(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
             }
         }
+
+        // Moving objects need be showed so that it is painted last. Therefore, it is showed.
+        // There will not be any dragged object at the same time, so just one of them will be executed
+        // Therefore it will be showed on the top of the objects
         if(dragged_rectangle!=null && !dragged_rectangle.isEmpty()){
             Rectangle rect = (Rectangle) dragged_rectangle.get(0);
             g.setColor((Color) dragged_rectangle.get(1));

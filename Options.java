@@ -5,8 +5,12 @@ import java.awt.event.ActionListener;
 
 public class Options extends JPanel{
 
+    /*
+        this JPanel includes the colors, buttons and blue line separator.
+     */
     public Options(Paint paint){
         setLayout(new BorderLayout());
+        // Buttons are created.
         JButton draw_rectangle_button = new JButton("Dikdortgen Ciz");
         JButton draw_oval_button = new JButton("Oval Ciz");
         JButton draw_with_pen_button = new JButton("Kalemle Ciz");
@@ -22,6 +26,7 @@ public class Options extends JPanel{
         draw_with_pen_button.setFont(new Font("Arial", Font.PLAIN, 14));
         move_button.setFont(new Font("Arial", Font.PLAIN, 14));
 
+        // When associated button is clicked, the mode is changed to it.
         draw_rectangle_button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -53,6 +58,7 @@ public class Options extends JPanel{
         buttonPanel.add(draw_with_pen_button);
         buttonPanel.add(move_button);
 
+        // colorPanel includes all the color palette's that you can choose.
         JPanel colorPanel = new JPanel(new GridLayout(1,7));
 
         colorPanel.add(new ColorPalette(Color.BLUE, paint));
@@ -62,10 +68,12 @@ public class Options extends JPanel{
         colorPanel.add(new ColorPalette(Color.ORANGE, paint));
         colorPanel.add(new ColorPalette(new Color(123, 35, 123), paint));
         colorPanel.add(new ColorPalette(Color.BLACK, paint));
-        add(colorPanel, BorderLayout.NORTH);
-        add(buttonPanel, BorderLayout.CENTER);
-        add(getBlueLineSeparator(), BorderLayout.SOUTH);
+        add(colorPanel, BorderLayout.NORTH);    // color panel is added to north of the optionPanel
+        add(buttonPanel, BorderLayout.CENTER);  // buttonPanel is added to center of the optionPanel
+        add(getBlueLineSeparator(), BorderLayout.SOUTH); // blueLineSeparator is added to south of the optionPanel
     }
+
+    // This JPanel represents the blue line in the paint-brush-app.
     public JPanel getBlueLineSeparator(){
         JPanel blueLine = new JPanel();
         blueLine.setBackground(Color.BLUE);

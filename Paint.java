@@ -1,13 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Paint extends JFrame {
 
     private Options optionsPanel;
     private DrawTable drawTable;
 
+    /*
+        option panel: buttons and colors
+        drawTable: the area that you can draw objects and writing with pen.
+        Objects(rectangle and ellipse) can be moved inside drawTable.
+     */
     public Paint(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 1000);
