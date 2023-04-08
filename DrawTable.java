@@ -83,14 +83,14 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
             int x_change = e.getX() - lastMousePosition.x;
             int y_change = e.getY() - lastMousePosition.y;
             System.out.println("Changed: x:"+x_change + ", y:"+y_change);
-            if(moving_shape.get(0).getClass().equals(Rectangle.class)){
+            if(!moving_shape.isEmpty() && moving_shape.get(0).getClass().equals(Rectangle.class)){
                 Rectangle rect = (Rectangle) moving_shape.get(0);
                 rect.x = rect.x + x_change;
                 rect.y = rect.y + y_change;;
                 moving_shape.remove(0);
                 moving_shape.add(0,rect);
             }
-            else if(moving_shape.get(0).getClass().equals(Ellipse2D.Double.class)){
+            else if(!moving_shape.isEmpty() && moving_shape.get(0).getClass().equals(Ellipse2D.Double.class)){
                 Ellipse2D.Double oval = (Ellipse2D.Double) moving_shape.get(0);
                 oval.x = oval.x + x_change;
                 oval.y = oval.y + y_change;
@@ -141,7 +141,7 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
         else if(mode.equals("move")){
             for(int i=all_shapes.size()-1; i>=0; i--){
                 ArrayList<Object> shape_info = all_shapes.get(i);
-                if(shape_info.get(0).getClass().equals(Rectangle.class)){
+                if(!shape_info.isEmpty() && shape_info.get(0).getClass().equals(Rectangle.class)){
                     Rectangle rect = (Rectangle) shape_info.get(0);
                     if(rect.getBounds().contains(e.getPoint())){
                         all_shapes.remove(i);
@@ -150,7 +150,7 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
                         break;
                     }
                 }
-                else if(shape_info.get(0).getClass().equals(Ellipse2D.Double.class)){
+                else if(!shape_info.isEmpty() && shape_info.get(0).getClass().equals(Ellipse2D.Double.class)){
                     Ellipse2D.Double oval = (Ellipse2D.Double) shape_info.get(0);
                     if(oval.getBounds().contains(e.getPoint())){
                         all_shapes.remove(i);
@@ -170,7 +170,7 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
         y = e.getY();
         end = e.getPoint();
         if(mode.equals("move")){
-            if(moving_shape.get(0).getClass().equals(Rectangle.class)){
+            if(!moving_shape.isEmpty() &&  moving_shape.get(0).getClass().equals(Rectangle.class)){
                 Rectangle rect = (Rectangle) moving_shape.get(0);
                 Color color = (Color) moving_shape.get(1);
                 ArrayList<Object> tmp = new ArrayList<>();
@@ -179,7 +179,7 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
                 all_shapes.add(tmp);
                 moving_shape.clear();
             }
-            else if(moving_shape.get(0).getClass().equals(Ellipse2D.Double.class)){
+            else if(!moving_shape.isEmpty() &&moving_shape.get(0).getClass().equals(Ellipse2D.Double.class)){
                 Ellipse2D.Double oval = (Ellipse2D.Double) moving_shape.get(0);
                 Color color = (Color) moving_shape.get(1);
                 ArrayList<Object> tmp = new ArrayList<>();
