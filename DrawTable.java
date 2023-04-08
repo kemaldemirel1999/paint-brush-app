@@ -22,7 +22,7 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
     private ArrayList<ArrayList> all_shapes;    // Includes all the shapes to be paint.
 
     private ArrayList<Object> moving_shape; // While objects is moved by 'tasi' button, it is painted.
-    private Point lastMousePos; // used for moving objects.
+    private Point lastMousePosition; // used for moving objects.
 
 
     public DrawTable(){
@@ -34,7 +34,7 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
         setVisible(true);
         this.pen_color = new Color(Color.BLACK.getRGB());
         this.mode = "";
-        this.lastMousePos = null;
+        this.lastMousePosition = null;
         this.all_shapes = new ArrayList<>();
         this.dragged_rectangle = new ArrayList<>();
         this.dragged_oval = new ArrayList<>();
@@ -80,24 +80,24 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
             dragged_oval.add(this.pen_color);
         }
         else if(this.mode.equals("move")){
-            int dx = e.getX() - lastMousePos.x;
-            int dy = e.getY() - lastMousePos.y;
-            System.out.println("Changed: x:"+dx + ", y:"+dy);
+            int x_change = e.getX() - lastMousePosition.x;
+            int y_change = e.getY() - lastMousePosition.y;
+            System.out.println("Changed: x:"+x_change + ", y:"+y_change);
             if(moving_shape.get(0).getClass().equals(Rectangle.class)){
                 Rectangle rect = (Rectangle) moving_shape.get(0);
-                rect.x = rect.x + dx;
-                rect.y = rect.y + dy;;
+                rect.x = rect.x + x_change;
+                rect.y = rect.y + y_change;;
                 moving_shape.remove(0);
                 moving_shape.add(0,rect);
             }
             else if(moving_shape.get(0).getClass().equals(Ellipse2D.Double.class)){
                 Ellipse2D.Double oval = (Ellipse2D.Double) moving_shape.get(0);
-                oval.x = oval.x + dx;
-                oval.y = oval.y + dy;
+                oval.x = oval.x + x_change;
+                oval.y = oval.y + y_change;
                 moving_shape.remove(0);
                 moving_shape.add(0,oval);
             }
-            lastMousePos = e.getPoint();
+            lastMousePosition = e.getPoint();
         }
         repaint(); // calls paint method
     }
@@ -160,7 +160,7 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
                     }
                 }
             }
-            lastMousePos = e.getPoint();
+            lastMousePosition = e.getPoint();
         }
         repaint(); // calls paint method
     }
