@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class Paint extends JFrame {
 
-    private Options optionsPanel;
+    private OptionsPanel optionsPanel;
     private DrawTable drawTable;
 
     /*
@@ -15,7 +15,7 @@ public class Paint extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 1000);
         setLocationRelativeTo(null);
-        this.optionsPanel = new Options(this);
+        this.optionsPanel = new OptionsPanel(this);
         add(optionsPanel, BorderLayout.NORTH);
         this.drawTable = new DrawTable();
         add(drawTable, BorderLayout.CENTER);

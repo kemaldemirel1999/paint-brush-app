@@ -24,6 +24,7 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
     private ArrayList<Object> moving_shape; // While objects is moved by 'tasi' button, it is painted.
     private Point lastMousePos; // used for moving objects.
 
+
     public DrawTable(){
         this.x = 0;
         this.y = 0;
@@ -168,7 +169,6 @@ public class DrawTable extends JPanel implements MouseMotionListener, MouseListe
         x = e.getX();
         y = e.getY();
         end = e.getPoint();
-
         if(mode.equals("move")){
             if(moving_shape.get(0).getClass().equals(Rectangle.class)){
                 Rectangle rect = (Rectangle) moving_shape.get(0);

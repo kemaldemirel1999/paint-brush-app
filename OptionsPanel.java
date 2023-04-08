@@ -3,12 +3,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Options extends JPanel{
+public class OptionsPanel extends JPanel{
 
     /*
         this JPanel includes the colors, buttons and blue line separator.
      */
-    public Options(Paint paint){
+    public OptionsPanel(Paint paint){
         setLayout(new BorderLayout());
         // Buttons are created.
         JButton draw_rectangle_button = new JButton("Dikdortgen Ciz");
